@@ -6,4 +6,4 @@
 
 ### Reference
 
-Wanglomklang, T., Gillot, F., and Besset, S. (2024). An intersection interaction hybrid method for energy flow at mid-high frequency for complex cavities acoustic. \textit{Proceedings of the 9th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS Congress 2024)}, Lisboa, Portugal, June 3-7, 2024.
+Wanglomklang, T., Gillot, F., and Besset, S. (2024). An intersection interaction hybrid method for energy flow at mid-high frequency for complex cavities acoustic. Proceedings of the 9th European Congress on Computational Methods in Applied Sciences and Engineering (ECCOMAS Congress 2024), Lisboa, Portugal, June 3-7, 2024.

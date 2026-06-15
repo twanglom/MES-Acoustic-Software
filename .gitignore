@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.venv/
+venv/
+
+# Build output
+build/
+dist/
+build-*/
+dist-*/
+installer-output/
+*.egg-info/
+
+# Generated simulation data
+output/
+project/
+*_files/
+VF_Files/
+*.npy
+*.npz
+*.vtk
+*.vtu
+
+# Local case data (examples under mes/geo remain available)
+/geo/
+
+# Local tooling and documents
+.idea/
+.vscode/
+*.pptx
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Replaced legacy VTK examples with `room.msh` and `a320.msh`, both containing
+  Gmsh Physical Surface IDs
+
 ## 0.1.0 - 2026-06-15
 
 ### Added

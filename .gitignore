@@ -23,8 +23,10 @@ VF_Files/
 *.vtk
 *.vtu
 
-# Local case data (examples under mes/geo remain available)
-/geo/
+# Local case data. Keep only the two public Gmsh examples.
+/geo/*
+!/geo/room.msh
+!/geo/a320.msh
 
 # Local tooling and documents
 .idea/

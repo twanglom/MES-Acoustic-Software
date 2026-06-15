@@ -13,6 +13,8 @@ except ImportError:
     from ret.geometry import MeshProcessor, ViewFactorCalculator
 
 BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
+GEO_DIR = PROJECT_ROOT / "geo"
 
 
 @dataclass(frozen=True)
@@ -24,16 +26,16 @@ class ViewFactorCase:
 
 
 CASES = {
-    "base": ViewFactorCase(
-        name="base",
-        mesh_path=BASE_DIR / "geo/base.msh",
-        vf_path=BASE_DIR / "geo/base_nominal_vf.npy",
-        skip_obstruction=True,
+    "room": ViewFactorCase(
+        name="room",
+        mesh_path=GEO_DIR / "room.msh",
+        vf_path=GEO_DIR / "room_vf.npy",
+        skip_obstruction=False,
     ),
-    "obs": ViewFactorCase(
-        name="obs",
-        mesh_path=BASE_DIR / "geo/obs.msh",
-        vf_path=BASE_DIR / "geo/obs_nominal_vf_check.npy",
+    "a320": ViewFactorCase(
+        name="a320",
+        mesh_path=GEO_DIR / "a320.msh",
+        vf_path=GEO_DIR / "a320_vf.npy",
         skip_obstruction=False,
     ),
 }

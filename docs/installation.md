@@ -35,7 +35,9 @@ python main_run.py
 
 ## Application Data
 
-The installer does not include user geometry or generated analysis data.
+The installer does not include geometry or generated analysis data. Clone or
+download the source repository to obtain the public `room.msh` and `a320.msh`
+test meshes.
 Keep the following files together when moving a saved project:
 
 - The project `.json` file

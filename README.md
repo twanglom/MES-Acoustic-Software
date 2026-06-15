@@ -16,7 +16,8 @@ Post-Process workflow._
 
 ## Features
 
-- Import Gmsh `.msh`, VTK `.vtk`, and VTU `.vtu` surface meshes
+- Import Gmsh `.msh` surface meshes with Physical Surface IDs
+- Retain `.vtk` and `.vtu` import support for backward compatibility
 - Read Gmsh Physical Surface IDs and names
 - Detect and correct surface-normal direction automatically
 - Assign absorption coefficients to one or more Physical Surfaces
@@ -67,18 +68,23 @@ python main_run.py
 
 ## Project Data
 
-Geometry, generated view-factor matrices, saved projects, and simulation
-results are intentionally excluded from the repository and installer.
+Generated view-factor matrices, saved projects, and simulation results are
+intentionally excluded from the repository and installer.
 
-Small example meshes used by the RET core are kept under `mes/geo`. Local case
-files can be placed under `geo`, which is ignored by Git.
+The complete GUI source, RET core, PyInstaller configuration, and Inno Setup
+configuration are included in this repository. A pre-built Windows GUI is
+available from [GitHub Releases](https://github.com/twanglom/MES-Acoustic-Software/releases).
 
-The repository also retains the original VTK demonstration geometries:
+Two Gmsh test meshes with Physical Surface IDs are included:
 
-- `simple_room`
-- `simple_room_with_obstacle`
-- `room_with_partition`
-- `aircraft_cabin`
+- [`geo/room.msh`](geo/room.msh): room with wall, floor, ceiling, and obstacle
+  surface groups
+- [`geo/a320.msh`](geo/a320.msh): A320 cabin surface model with cabin material
+  groups
+
+The legacy VTK examples were removed because they do not contain the Physical
+Surface IDs required by the current material-assignment workflow. Generated
+`.npy`, `.vtk`, and `.vtu` result files remain ignored.
 
 ## Reference
 

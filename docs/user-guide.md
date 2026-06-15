@@ -10,10 +10,18 @@ MES-Acoustic uses these Physical Surface IDs to assign material absorption.
 Surface normals are checked and corrected automatically for RET view-factor
 calculation.
 
+The repository includes two ready-to-load examples:
+
+- `geo/room.msh` for a compact room test
+- `geo/a320.msh` for a larger aircraft-cabin test
+
+Start with `room.msh` when testing view-factor computation because its mesh is
+substantially smaller.
+
 ## 2. Create A Project
 
 1. Select **File > New Project**.
-2. Open a `.msh`, `.vtk`, or `.vtu` mesh.
+2. Open `geo/room.msh`, `geo/a320.msh`, or another compatible mesh.
 3. Confirm that the geometry appears in the PyVista viewport.
 4. In **Initial Setup**, right-click **Geometric information** and select
    **Mesh Data** to inspect the imported mesh.

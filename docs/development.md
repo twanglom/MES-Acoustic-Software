@@ -9,6 +9,8 @@
 - `mes/ret/postprocess.py`: receiver-plane and result utilities
 - `mes/ret/config.py`: solver configuration data classes
 - `mes/ret/examples`: core API examples and validation cases
+- `geo/room.msh`: small GUI test mesh with Physical Surface IDs
+- `geo/a320.msh`: larger A320 cabin test mesh with Physical Surface IDs
 - `MES-Acoustic.spec`: CPU-only PyInstaller configuration
 - `installer/MES-Acoustic.iss`: Inno Setup installer configuration
 
@@ -28,7 +30,8 @@ The supported development interpreter is Python 3.11 on 64-bit Windows.
 
 The preferred input is a closed, triangulated Gmsh surface mesh containing
 `gmsh:physical` cell data. Physical Surface names and IDs are read by
-`MeshProcessor`.
+`MeshProcessor`. The public regression meshes are `geo/room.msh` and
+`geo/a320.msh`.
 
 RET view factors require inward-facing surface normals. `prepare_geometry()`
 computes cell normals, estimates their direction relative to the enclosure
@@ -77,6 +80,9 @@ Or run the complete release script:
 ```
 
 Output is written to `installer-output`.
+
+The `geo` examples are repository test data and are intentionally not bundled
+into the Windows installer.
 
 ## Before Submitting Changes
 

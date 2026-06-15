@@ -19,6 +19,9 @@ except ImportError:
     from ret.postprocess import EnergyFieldCalculator, SPLPlaneCalculator
 
 BASE_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = BASE_DIR.parent
+GEO_DIR = PROJECT_ROOT / "geo"
+OUTPUT_DIR = PROJECT_ROOT / "output"
 
 
 @dataclass(frozen=True)
@@ -31,18 +34,18 @@ class AcousticCase:
 
 
 CASES = {
-    "base": AcousticCase(
-        name="base",
-        mesh_path=BASE_DIR / "geo/base.msh",
-        vf_path=BASE_DIR / "geo/base_nominal_vf.npy",
-        output_dir=BASE_DIR / "output/nominal/base",
-        check_obstruction=False,
+    "room": AcousticCase(
+        name="room",
+        mesh_path=GEO_DIR / "room.msh",
+        vf_path=GEO_DIR / "room_vf.npy",
+        output_dir=OUTPUT_DIR / "room",
+        check_obstruction=True,
     ),
-    "obs": AcousticCase(
-        name="obs",
-        mesh_path=BASE_DIR / "geo/obs.msh",
-        vf_path=BASE_DIR / "geo/obs_nominal_vf_check.npy",
-        output_dir=BASE_DIR / "output/nominal/obs",
+    "a320": AcousticCase(
+        name="a320",
+        mesh_path=GEO_DIR / "a320.msh",
+        vf_path=GEO_DIR / "a320_vf.npy",
+        output_dir=OUTPUT_DIR / "a320",
         check_obstruction=True,
     ),
 }
@@ -53,25 +56,19 @@ AVAILABLE_CASES = {
     if case.mesh_path.exists()
 }
 
-# Physical IDs stored in geo/base.msh and geo/obs.msh.
-PHYS_ID = {
-    "WALL": 1,
-    "FLOOR": 2,
-    "TOP": 3,
-    "OBS1": 4,
-    "OBS2": 5,
-}
-
-# Absorption coefficients. Adjust here if you want different materials.
-ALPHA = {
-    "WALL": 0.2,
-    "FLOOR": 0.3,
-    "TOP": 0.2,
-    "OBS1": 0.1,
-    "OBS2": 0.1,
-}
-
 DEFAULT_SOURCE = np.array([0.5, 0.5, 0.5])
+
+
+def absorption_by_surface(physical_ids: dict[str, int]) -> dict[str, float]:
+    """Return simple example absorption values for imported surface names."""
+    alpha = {name: 0.2 for name in physical_ids}
+    for name in alpha:
+        normalized = name.upper()
+        if "FLOOR" in normalized:
+            alpha[name] = 0.3
+        elif "OBS" in normalized:
+            alpha[name] = 0.1
+    return alpha
 
 
 def parse_args() -> argparse.Namespace:
@@ -161,7 +158,14 @@ def run_case(
             f"Recompute with: python compute_viewfactors.py --case {case.name} --force"
         )
 
-    alpha = create_alpha_array(mesh, PHYS_ID, ALPHA, default=ALPHA["WALL"])
+    physical_ids = processor.physical_ids
+    alpha_by_name = absorption_by_surface(physical_ids)
+    alpha = create_alpha_array(
+        mesh,
+        physical_ids,
+        alpha_by_name,
+        default=0.2,
+    )
     print(f"  Alpha: mean={alpha.mean():.3f}, min={alpha.min():.3f}, max={alpha.max():.3f}")
 
     print("\n[3] Solve steady-state RET")

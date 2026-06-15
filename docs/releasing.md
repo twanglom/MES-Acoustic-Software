@@ -56,8 +56,8 @@ Get-FileHash installer-output\MES-Acoustic-0.1.0-Windows-x64-Setup.exe -Algorith
 7. Attach a checksum text file if available.
 8. Publish the release.
 
-Do not attach local geometry, project data, or generated view-factor matrices
-unless they are intentionally prepared as separate example assets.
+Do not attach local project data or generated view-factor matrices. The small
+`geo/room.msh` and `geo/a320.msh` examples are versioned with the source.
 
 ## Suggested Release Notes
 
